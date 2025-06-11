@@ -13,43 +13,24 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js/bootstrap.bundle.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-<h1 class="text-left">UBKGBox</h1>
-<img src="./images/ubkgbox.jpg" class="img-fluid" alt="Responsive image">
-<table class="table-bordered border-black border-10">
-  <thead>
-    <tr>
-      <th scope="col">Compartment</th>
-      <th scope="col">Description</th>
-      <th scope="col">Link</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">UBKG API</th>
-      <td>REST API</td>
-      <td><a href="http://localhost:8080/api">link</a></td>
-    </tr>
-    <tr>
-      <th scope="row">Swagger</th>
-      <td>Specification for the UBKG-API</td>
-      <td><a href="http://localhost:8080/swagger">link</td>
-    </tr>
-    <tr>
-      <th scope="row">neo4j Browser</th>
-      <td>Graph Web browser</td>
-      <td><a href="http://localhost:8080/browser">link</td>
-    </tr>
-    <tr>
-      <th scope="row">Guesdt</th>
-      <td>Graphing UMLS Enables Search In Dynamic Trees</td>
-      <td><a href="http://localhost:8080/Guesdt">link</td>
-    </tr>
-  <tr>
-      <th scope="row">Documentation</th>
-      <td>UBKG Documentation</td>
-      <td><a href="https://ubkg.docs.xconsortia.org/">link</td>
-    </tr>
-  </tbody>
-</table>
+    <h1 class="text-left">UBKGBox</h1>
+    <img src="./images/ubkgbox.jpg" alt="UBKGBox" class="img-thumbnail">
+    <!-- port 7200 = ubkg-auth -->
+    <form action="http://localhost:7100/go" method="GET" id="appform">
+        <div class="form-group m-3">
+            <label for="umls-key">Provide a UMLS API key for a UMLS licensee:</label>
+            <input type="password" class="form-control" id="umls-key" name="umls-key" placeholder="UMLS API Key">
+        </div>
+        <div class="form-group m-3">
+            <label for="apps">Select a UBKG application:</label>
+            <select id="apps" name="app" form="appform">
+                <option value="http://localhost:7000">UBKG API</option>
+                <option value="http://localhost:4000">neo4j browswer</option>
+                <option value="https://ubkg.docs.xconsortia.org">UBKG Documentation</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary m-3">Launch</button>
+    </ul>
+    </form>
 </body>
 </html>
