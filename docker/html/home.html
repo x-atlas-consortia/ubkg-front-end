@@ -13,32 +13,29 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js/bootstrap.bundle.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="mx-auto m-3" style="width: 200px;">
-    <h1>UBKGBox</h1>
-</div>
-    <img class="img-responsive m-3" src="./images/ubkgbox.jpg" alt="UBKGBox" width="420" height="400">
-    <form action="http://localhost:7100/go" method="GET" id="appform">
-        <div class="form-group row m-3">
-            <div class="col-xs-4 m-3">
-                <label for="umls-key" class="m-3">UMLS API Key</label>
-                <div class="btn-group" data-toggle="buttons" id="btn-group-id1">
-                    <input class="form-control" id="umls-key" name="umls-key" type="password" placeholder="UMLS API Key">
-                </div>
-            </div>
+
+<form action="http://localhost:7100/go" method="GET" id="appform">
+    <div class="mb-3 m-3">
+        <h1>UBKGBox</h1>
+        <img src="./images/ubkgbox.jpg" class="responsive" width="320" height="300">
+    </div>
+    <div class="input-group mb-3 m-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">UMLS API Key</span>
         </div>
-        <div class="form-group row m-3">
-            <div class="col-xs-2 m-3">
-                <div class="btn-group" data-toggle="buttons" id="btn-group-id2">
-                    <label class="m-3">
-                        <input type="radio" name="app_port" id="app_port" value="7000" >
-                        UBKG API
-                        <!--<input type="text" name="endpoint" placeholder="endpoint"/>-->
-                    </label>
-                </div>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary m-3">Launch</button>
-    </ul>
-    </form>
+        <input class="form-control" id="umls-key" name="umls-key" type="password">
+    </div>
+    <div class="mb-3 m-3">
+        <h3> UBKG applications</h3>
+        <label>
+            <input type="radio" name="app_port" id="app_port" value="7000">
+            UBKG API
+        </label>
+        <input type="text" class="form-control" name="endpoint" id="endpoint" placeholder="endpoint"/>
+      </div>
+    <div class="mb-3 m-3">
+        <button type="submit m-3" class="btn btn-primary">Launch</button>
+    </div>
+</form>
 </body>
 </html>
