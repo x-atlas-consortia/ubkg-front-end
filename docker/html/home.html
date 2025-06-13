@@ -10,19 +10,20 @@
     <!-- Bootstrap styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Bootstrap Javascript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js/bootstrap.bundle.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script type="text/javascript">
+    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js/bootstrap.bundle.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>-->
+    <script>
         function toggleOptionalDisplays() {
 
             const input_umlskey = document.getElementById('umls-key');
             const input_ubkgapi = document.getElementById('ubkg-api');
+            const input_neo4j = document.getElementById('neo4j');
             const launchbutton = document.getElementById('form_launch');
             const divEndpoint = document.getElementById('endpointDiv');
 
             // Enable form submit button only
             // - if both the UMLS API key has been entered
             // - at least one option has been selected.
-            launchbutton.disabled = !(input_umlskey.value.trim()!="" && input_ubkgapi.checked);
+            launchbutton.disabled = !(input_umlskey.value.trim()!="" && (input_ubkgapi.checked || input_neo4j.checked));
 
             // Display the ubkg-api endpoint div only if ubkg-api was checked.
             if (input_ubkgapi.checked) {
@@ -49,17 +50,22 @@
     <div class="mb-3 m-3">
         <h3> UBKG applications</h3>
         <label>
-            <input type="checkbox" onclick="toggleOptionalDisplays()" id="ubkg-api" name="app_port" value="7000">
+            <input type="radio" onclick="toggleOptionalDisplays()" id="ubkg-api" name="app_port" value="7000">
             UBKG API
         </label>
+        </br>
         <!--Endpoint div display toggled by ubkg-api checkbox-->
         <div class="form-group" id="endpointDiv" style="display: none;">
             <input type="text" class="form-control" name="endpoint" id="endpoint" placeholder="optional endpoint"/>
         </div>
+        <label>
+            <input type="radio" onclick="toggleOptionalDisplays()" id="neo4j" name="app_port" value="4000">
+            neo4j
+        </label>
       </div>
     <!--Launch button enabled based on inputs-->
     <div class="mb-3 m-3">
-        <button disabled type="submit m-3" class="btn btn-primary" id="form_launch">Launch</button>
+        <button disabled type="submit m-3" class="btn btn-primary" id="form_launch">Launch Application</button>
     </div>
 </form>
 </body>
