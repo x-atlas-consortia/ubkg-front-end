@@ -1,0 +1,16 @@
+.idea/
+.DS_Store
+server.bak/
+venv/
+**/*.bak
+\#*\#
+**~
+
+# log files in any path
+**/*.log
+
+**/__pycache__
+
+**/.pytest_cache
+**/dist
+
