@@ -5,14 +5,22 @@ services:
   ubkg-front-end:
     hostname: ubkg-front-end
     container_name: ubkg-front-end
-    # Map host machine port 7200 to container port 8080
+    # Map host machine port 7100 to container port 8080
     ports:
-      - "7200:8080"
+      - "7100:8080"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080"]
       interval: 1m30s
       timeout: 10s
       retries: 3
       start_period: 40s
+    environment:
+      # neo4j browser port for the ubkg-back-end service.
+      - UI_PORT
+      # UID and GID 1001 to match the ubkg user by default.
+      # These environment variables will be passed to the Dockerfile and used to configure the non-root
+      # user under which nginx will run.
+      - HOST_GID=${HOST_GID:-1001}
+      - HOST_UID=${HOST_UID:-1001}
     init: true
     restart: always
