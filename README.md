@@ -1,15 +1,6 @@
 # ubkg-front-end
 
-**UBKGBox** is a self-contained, networked, multi-container UBKG application featuring:
-- a container hosting a UBKG context running in neo4j, built from the [ubkg-neo4j](https://github.com/x-atlas-consortia/ubkg-neo4j) Docker architecture
-- containers that work with the UBKG instance, including:
-   - an instance of the UBKG API (https://github.com/x-atlas-consortia/ubkg-api), a REST API
-   - Swagger documentation for the UBKG API
-   - an instance of [Guesdt](https://github.com/x-atlas-consortia/Guesdt), a Web UI that represents the UBKG in tree view
-   - the neo4j browser
-- a front-end UI with networked links to client components, built from the [ubkg-front-end](https://github.com/x-atlas-consortia/ubkg-front-end) architecture
-
-This repository contains source to build and publish the **ubkg-front-end** component.
+This repository contains source to build and publish the **ubkg-front-end** component of the **[UBKGBox](https://github.com/x-atlas-consortia/ubkg-box)** Docker container application.
 
 # Supported platforms
 The bash shell scripts contained in this directory are intended for use on Mac OS X or Linux. 
