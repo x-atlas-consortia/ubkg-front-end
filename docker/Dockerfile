@@ -73,8 +73,7 @@ module_hotfixes=true\n'\
 # 5 - Overwrite the nginx.conf with ours to run nginx as non-root. Copy over conf.d.
 # 6 - Remove the nginx directory copied from host machine (nginx/conf.d gets mounted to the container).
 # 7 - Make the start script executable.
-# 8 - Get the Guesdt source from the GitHub repo and copy to the nginx html path.
-# 9 - Clean all yum cache.
+# 8 - Clean all yum cache.
 
 # RUN yum install -y yum-utils && \
 RUN yum-config-manager --enable nginx-mainline && \
@@ -84,21 +83,9 @@ RUN yum-config-manager --enable nginx-mainline && \
     mv nginx/conf.d /etc/nginx &&\
     rm -rf nginx && \
     chmod +x start.sh && \
-    git clone https://github.com/x-atlas-consortia/Guesdt /tmp/Guesdt &&\
-    mkdir -p /etc/nginx/Guesdt/ &&\
-    mv /tmp/Guesdt/docs /etc/nginx/Guesdt &&\
-    rm -Rf /tmp/Guesdt/ && \
+    mv html/home.html /usr/share/nginx/home.html &&\
+    mv html/images /usr/share/nginx &&\
     yum clean all
-
-# Copy the UBKGBox home page files to the nginx html root.
-COPY html/home.html /usr/share/nginx/home.html
-COPY html/images /usr/share/nginx/images/
-
-# Obtain the Guesdt source from GitHub and copy to the container.
-RUN git clone https://github.com/x-atlas-consortia/Guesdt.git usr/src/app/guesdt/source
-
-
-
 
 EXPOSE 7100 8080
 
