@@ -75,7 +75,8 @@
             <input type="text" class="form-control" id="endpoint" name="endpoint" placeholder = "e.g., codes/SNOMEDCT_US:79962008/concepts"aria-label="Enter optional endpoint" rows="2">
         </div>
         <div class="col-sm-4">
-            <input type="submit" formaction="http://localhost:7100/api" class="btn btn-primary" id="ubkgapi_button" value="UBKG API" aria-label="UBKG API">
+            <!--<input type="submit" formaction="http://localhost:7100/api" class="btn btn-primary" id="ubkgapi_button" value="UBKG API" aria-label="UBKG API">-->
+            <input type="submit" formaction="http://localhost:7000/api" class="btn btn-primary" id="ubkgapi_button" value="UBKG API" aria-label="UBKG API">
         </div>
     </div>
     <div class="form-group row m-3">
@@ -86,7 +87,7 @@
             <input type="submit" class="btn btn-primary" formaction="http://localhost:UI_PORT/browser" id="neo4j_button" value="neo4j" aria-label="Launch neo4j">
         </div>
         <div class="col-sm-2">
-             <input type="submit" class="btn btn-primary" formaction="http://localhost:7300" id="guesdt_button" value="Guesdt" aria-label="Launch Guesdt">
+             <input type="submit" class="btn btn-primary" formaction="http://localhost:7000/guesdt" id="guesdt_button" value="Guesdt" aria-label="Launch Guesdt">
         </div>
     </div>
 </form>
