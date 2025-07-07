@@ -48,7 +48,7 @@ RUN yum install --assumeyes  procps-ng make && \
     yum clean all
 
 # ----------------
-# INSTALL NGINX AND Guesdt VIA YUM.
+# INSTALL NGINX VIA YUM.
 
 # Change to directory that contains the Dockerfile.
 WORKDIR /usr/src/app
