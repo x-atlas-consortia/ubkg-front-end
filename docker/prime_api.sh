@@ -14,7 +14,8 @@ set -u
 # that page populates with content from the ubkg-api.
 ##########
 
-# In lieu of depending on the healthcheck in Docker
+# Wait in lieu of depending on the healthcheck for ubkg-back-end in Docker.
+# 30 seconds appears to be sufficient time for the neo4j instance to be ready.
 sleep 30
 
 echo "UBKG-api initialization script"

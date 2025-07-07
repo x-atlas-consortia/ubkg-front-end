@@ -43,3 +43,18 @@ Once at least two buildx builders are available, the build workflow will build a
    The last image and container correspond to the image with linux/arm64 architecture.
 4. `./build_ubkg-front-end.sh push` will push tagged images for both linux/amd64 and linux/arm64 architectures to the Docker hub repo named **hubmap/ubkg-front-end**.
 
+# Initialization of the neo4j Query Plan Cache
+When a Cypher query is executed for the first time in a new neo4j instance, neo4j
+must add the query plan to its [plan cache](https://neo4j.com/developer/kb/understanding-the-query-plan-cache/). 
+Plan caching results in the initial
+execution of the query taking longer than subsequent executions.
+
+In the ubkg-api in UBKGBox, the initial execution of a query will fail with a HTTP 500 error because of 
+delays from plan caching. 
+
+To address this issue, the front end executes a set of known queries immediately after the neo4j
+instance is up. This is akin to priming a pump.
+
+In particular, executing the initial set of queries before the user 
+has the opportunity to execute a query mitigates the risk
+of the Guesdt application failing in the initial load of its index.html page.
