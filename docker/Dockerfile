@@ -72,7 +72,7 @@ module_hotfixes=true\n'\
 # 4 - Remove the default nginx config file.
 # 5 - Overwrite the nginx.conf with ours to run nginx as non-root. Copy over conf.d.
 # 6 - Remove the nginx directory copied from host machine (nginx/conf.d gets mounted to the container).
-# 7 - Make the start script executable.
+# 7 - Make the start scripts executable.
 # 8 - Clean all yum cache.
 
 # RUN yum install -y yum-utils && \
@@ -83,6 +83,7 @@ RUN yum-config-manager --enable nginx-mainline && \
     mv nginx/conf.d /etc/nginx &&\
     rm -rf nginx && \
     chmod +x start.sh && \
+    chmod +x prime_api.sh && \
     mv html/home.html /usr/share/nginx/home.html &&\
     mv html/images /usr/share/nginx &&\
     yum clean all
