@@ -83,35 +83,13 @@
         <div class="col-sm-2">
             <!--UI_PORT corresponds to the configurable browser port of the ubkg-back-end service.-->
             <!--The ubkg-box Dockerfile will overwrite the value of UI_PORT at container build time.-->
-            <input type="submit" class="btn btn-primary" formaction="http://localhost:UI_PORT/browser" id="neo4j_button" value="neo4j" aria-label="Launch neo4j">
+            <!--<input type="submit" class="btn btn-primary" formaction="http://localhost:UI_PORT/browser" id="neo4j_button" value="neo4j" aria-label="Launch neo4j">-->
+            <input type="submit" class="btn btn-primary" formaction="/neo4j/browser/" id="neo4j_button" value="neo4j" aria-label="Launch neo4j">
         </div>
         <div class="col-sm-2">
              <input type="submit" class="btn btn-primary" formaction="/guesdt" id="guesdt_button" value="Guesdt" aria-label="Launch Guesdt">
         </div>
     </div>
 </form>
-<script>
-
-    // neo4j browser button
-    // Authenticates via JavaScript.
-    // Allows launch of the browser only if the API key is validated by the UMLS API.
-    document.getElementById("neo4j_button").addEventListener('click', async (event) => {
-
-        const boxForm = document.getElementById("ubkgbox_form");
-        // Override the default submit action.
-        event.preventDefault();
-        test = await validatekey("neo4j_button");
-        if (test==="true") {
-            // The placeholder UI_PORT will be replaced by the Dockerfile's entrypoint
-            // with the actual port used by the ubkg-back-end service.
-            boxForm.action = "http://localhost:UI_PORT/browser";
-            console.log(boxForm.action);
-            boxForm.submit();
-        } else {
-            alert("Please provide a valid UMLS API key.");
-        }
-    });
-
-</script>
 </body>
 </html>

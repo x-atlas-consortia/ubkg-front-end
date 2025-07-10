@@ -75,7 +75,7 @@ module_hotfixes=true\n'\
 # 7 - Make the start scripts executable.
 # 8 - Clean all yum cache.
 
-# RUN yum install -y yum-utils && \
+
 RUN yum-config-manager --enable nginx-mainline && \
     yum install -y nginx && \
     rm /etc/nginx/conf.d/default.conf && \
