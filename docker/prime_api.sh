@@ -22,6 +22,26 @@ echo "UBKG-api initialization script"
 
 UBKG_URL=http://ubkg-api:8080
 
+echo "calling: /"
+curl --request GET \
+ --url "${UBKG_URL}/" \
+ --header "Accept: application/json" | cut -c1-60
+
+echo "calling: /status"
+curl --request GET \
+ --url "${UBKG_URL}/status" \
+ --header "Accept: application/json" | cut -c1-60
+
+echo "first call: /sources"
+curl --request GET \
+ --url "${UBKG_URL}/sources" \
+ --header "Accept: application/json" | cut -c1-60
+
+echo "repeat call: /sources"
+curl --request GET \
+ --url "${UBKG_URL}/sources" \
+ --header "Accept: application/json" | cut -c1-60
+
 # Guesdt specific
 echo "calling: /codes/FMA:7149/codes"
 curl --request GET \

@@ -46,15 +46,57 @@ Once at least two buildx builders are available, the build workflow will build a
 # Initialization of the neo4j Query Plan Cache
 When a Cypher query is executed for the first time in a new neo4j instance, neo4j
 must add the query plan to its [plan cache](https://neo4j.com/developer/kb/understanding-the-query-plan-cache/). 
-Plan caching results in the initial
-execution of the query taking longer than subsequent executions.
+Plan caching results in the initial execution of the query taking longer than subsequent executions.
 
-In the ubkg-api in UBKGBox, the initial execution of a query will fail with a HTTP 500 error because of 
-delays from plan caching. 
+In the ubkg-api in UBKGBox, the initial execution of an endpoint may fail with a HTTP 500 error 
+because of delays or other issues related to query plan caching in the neo4j database. Because the Guesdt
+application obtains content by using the ubkg-api, failures in the ubkg-api means that the Guesdt page will 
+not load correctly.
 
-To address this issue, the front end executes a set of known queries immediately after the neo4j
-instance is up. This is akin to priming a pump.
+To address this issue, the front end executes the shell script **prime_api.sh** that 
+submits via curl a set of known endpoints in the ubkg-api immediately after the neo4j
+instance is ready. At least the first such request to the endpoint will fail. This is akin to priming a pump. 
 
-In particular, executing the initial set of queries before the user 
+Executing an initial set of queries in neo4j before a user 
 has the opportunity to execute a query mitigates the risk
 of the Guesdt application failing in the initial load of its index.html page.
+
+# nginx configuration
+
+The UBKGBox front end has a complex nginx configuration because of its multiple roles 
+as host for the UBKG home page and reverse proxy for the other **UBKGBox** services. 
+
+### UMLS authorization
+The majority of the locations in the nginx configuration proxy to the **umls_auth** service.
+The **umls-auth** service authenticates a supplied UMLS API key against the UMLS API.
+
+Some routes bypass authentication because they originate from the service sites. These include:
+
+| location        | supports  | action                                                             |
+|-----------------|:----------|--------------------------------------------------------------------|
+| /               | front end | external URLs                                                      |
+| /static/        | Guesdt    | requests for static resources from pages of the Guesdt application |
+| /userguide.html | Guesdt    | Requests for the static User Guide page in the Guesdt application  |
+|/neo4j/browser| neo4j| internal redirects from neo4j|
+|(regex)|neo4j|requests for static resources from neo4j|
+
+## neo4j support
+Much of the front end's nginx configuration supports integration with the neo4j browser for the neo4j instance
+hosted in the **ubkg-back-end** service. Important characteristics of the neo4j browser include:
+1. It is a [single page application](https://en.wikipedia.org/wiki/Single-page_application) that emits many redirects to itself
+2. It uses both the http and bolt protocols. 
+
+To support the neo4j browser, the nginx configuration features:
+1. In the main location (_/neo4j/browser_), 
+   - Use of _proxy_redirect_ directives to handle redirects from neo4j 
+   - Use of WebSockets (for the bolt protocol)
+2. The _/neo4j/browser_ location to handle neo4j redirects
+3. A location to handle requests for static resources (JavaScript) from the neo4j browser
+4. A separate stream for the bolt protocol
+
+## UBKGBox subnodes
+The front end assumes that there are network subnodes defined for downstream UBKG services. 
+The only required subnode is one named **neo4j.ubkg.com**, to allow reverse proxying to the neo4j browser hosted 
+by the **ubkg-back-end** service.
+
+Refer to the README.md in the ubkg-box repository for details.

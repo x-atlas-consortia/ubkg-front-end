@@ -17,42 +17,6 @@
             margin-right: auto;
         }
     </style>
-<script>
-
-    async function validatekey(buttonid) {
-
-        // Validates the value provided in the umls-key input against the UMLS API.
-        // Use case: addEventListener of a form button.
-        // Argument:
-        //    buttonid - ID of button clicked
-        // Return:
-        //    either "true" or "false".
-
-        const key = document.getElementById("umls-key");
-        const button = document.getElementById(buttonid);
-
-        let url = "https://utslogin.nlm.nih.gov/validateUser?validatorApiKey=" + key.value + "&apiKey=" + key.value;
-
-        // Call the UMLS API with the API key and examine the response.
-        try {
-            // Await the fetch call to get the Response object
-            const response = await fetch(url);
-
-            // The UMLS API returns a 401 if the provided UMLS API key did not authenticate.
-            if (!response.ok) {
-                return "false";
-            }
-
-            // Await the parsing of the response body as text
-            const data = await response.text();
-            return data;
-
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            return "false";
-        }
-    }
-</script>
 </head>
 <body>
 <div class="mb-3 m-3">
@@ -81,10 +45,7 @@
     <div class="form-group row m-3">
         <h4>Browser applications</h4>
         <div class="col-sm-2">
-            <!--UI_PORT corresponds to the configurable browser port of the ubkg-back-end service.-->
-            <!--The ubkg-box Dockerfile will overwrite the value of UI_PORT at container build time.-->
-            <!--<input type="submit" class="btn btn-primary" formaction="http://localhost:UI_PORT/browser" id="neo4j_button" value="neo4j" aria-label="Launch neo4j">-->
-            <input type="submit" class="btn btn-primary" formaction="/neo4j/browser/" id="neo4j_button" value="neo4j" aria-label="Launch neo4j">
+             <input type="submit" class="btn btn-primary" formaction="/neo4j/browser/" id="neo4j_button" value="neo4j" aria-label="Launch neo4j">
         </div>
         <div class="col-sm-2">
              <input type="submit" class="btn btn-primary" formaction="/guesdt" id="guesdt_button" value="Guesdt" aria-label="Launch Guesdt">
