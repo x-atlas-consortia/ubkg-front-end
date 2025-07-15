@@ -70,6 +70,9 @@ as host for the UBKG home page and reverse proxy for the other **UBKGBox** servi
 The majority of the locations in the nginx configuration proxy to the **umls_auth** service.
 The **umls-auth** service authenticates a supplied UMLS API key against the UMLS API.
 
+The reverse proxy passes the UMLS API key by means of a session cookie. 
+The UBKG home page (**home.html**) uses a modal box to obtain the UMLS API key if the cookie is empty.
+
 Some routes bypass authentication because they originate from the service sites. These include:
 
 | location        | supports  | action                                                             |
