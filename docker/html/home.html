@@ -68,17 +68,17 @@
     </script>
 </head>
 <body>
-<div class="position-relative d-flex mb-3" style="margin-left:0;">
-    <img src="images/ubkgbox.jpg" width="320" height="300" class="imgubkgbox d-block" style="margin-left:0;">
-    <figcaption
-        class="position-absolute"
-        style="left: 320px; top: 50%; transform: translateY(-50%); font-size:50px; white-space:nowrap;">
+<div class="d-flex align-items-center mb-3" style="gap: 1rem;">
+    <img src="images/ubkgbox.jpg" width="320" height="300" class="imgubkgbox d-block" alt="UBKGBox">
+    <figcaption style="font-size:50px; white-space:nowrap; margin-left: 1rem; margin-bottom: 0;">
         UBKGBox
     </figcaption>
+    <a href="https://ubkg.docs.xconsortia.org/" class="btn btn-primary ms-4" role="button" target="_blank" style="white-space:nowrap; height: fit-content;">
+        Go to UBKG Documentation
+    </a>
 </div>
-<br>
-<br>
-<form id="api_form" target="_blank" class="m-3">
+
+<form id="api_form" target="_blank" class="m-3 p-3 border rounded shadow-sm">
     <h3>UBKG API</h3>
     <div class="row align-items-center g-2">
         <div class="col-auto">
@@ -97,7 +97,6 @@
     <div class="row mt-2">
         <div class="col-md-2">
             <button type="submit"
-                formaction="/api"
                 class="btn btn-primary w-100"
                 id="ubkgapi_button"
                 aria-label="UBKG API">
@@ -106,8 +105,34 @@
         </div>
     </div>
 </form>
+<script>
+    // Appends the endpoint string to the call to the ubkg-api. The reverse proxy
+    // will strip the /api/ portion of the string when forwarding to the ubkg-api.
 
-<form action="/neo4j/browser/" method="get" target="_blank" class="m-3">
+    document.getElementById('api_form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const endpoint = document.getElementById('endpoint').value.trim();
+        // Ensure endpoint does not start with a slash
+        const apiUrl = endpoint ? `/api/${endpoint.replace(/^\/+/, '')}` : '/api/';
+        window.open(apiUrl, '_blank');
+    });
+</script>
+
+<form action="/swagger/" method="get" target="_blank" class="m-3 p-3 border rounded shadow-sm">
+    <h3>Swagger Documentation for UBKG API</h3>
+    <div class="row align-items-center g-2">
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100" id="swagger_button" value="Swaggr" aria-label="Launch Swagger">
+                Launch Swagger
+            </button>
+        </div>
+        <div class="col-md-7 col-sm-8">
+            <i>When the Swagger page loads, select <strong>Authorize</strong>, then enter <strong>umls-key</strong>(space)(your UMLS API key)</i>.
+        </div>
+    </div>
+</form>
+
+<form action="/neo4j/browser/" method="get" target="_blank" class="m-3 p-3 border rounded shadow-sm">
     <h3>neo4j</h3>
     <div class="row align-items-center g-2">
         <div class="col-md-2">
@@ -116,13 +141,13 @@
             </button>
         </div>
         <div class="col-md-7 col-sm-8">
-            <i>In the neo4j browser login, enter <strong>neo4j://neo4j.ubkg.com:7001</strong> for <strong>Connect URL</strong>; <strong>neo4j</strong> for <strong>Username</strong>; and the password for the neo4j user in <strong>Password</strong>.</i>
+            <i>When the neo4j browser login page loads, enter <strong>neo4j://neo4j.ubkg.com:7001</strong> for <strong>Connect URL</strong>; <strong>neo4j</strong> for <strong>Username</strong>; and the password for the neo4j user in <strong>Password</strong>.</i>
         </div>
     </div>
 </form>
 
-<form action="/guesdt" method="get" target="_blank" class="m-3">
-    <h3>Guesdt</h3>
+<form action="/guesdt" method="get" target="_blank" class="m-3 p-3 border rounded shadow-sm">
+    <h3>Guesdt (Graphing UMLS Enables Search in Dynamic Trees)</h3>
     <div class="row align-items-center g-2">
         <div class="col-md-2">
             <button type="submit" class="btn btn-primary w-100" id="guesdt_button" value="Guesdt" aria-label="Launch Guesdt">
@@ -131,10 +156,11 @@
         </div>
     </div>
 </form>
+
 <footer>
     <div class="m-3">
-        <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'><img alt='Creative Commons License' style='border-width:0' src='https://i.creativecommons.org/l/by/4.0/80x15.png' /></a><span xmlns:dct='http://purl.org/dc/terms/' property='dct:title'>  <strong>UBKGBox</strong>, built by the Department of Biomedical Informatics, University of Pittsburgh School of Medicine, </span> is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a>.
-    </div>
+        <a href="https://github.com/x-atlas-consortia/ubkg-box">UBKGBox</a> © 2025 by <a href="https://github.com/AlanSimmons">Alan Simmons, Department of Biomedical Informatics, University of Pittsburgh School of Medicine</a> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+     </div>
 </footer>
 <!-- Bootstrap JS (for modal) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script></body>
