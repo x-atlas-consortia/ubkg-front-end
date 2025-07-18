@@ -82,5 +82,11 @@ curl --request GET \
  --header "Accept: application/json" | cut -c1-60
 
 echo "Initialization complete"
+echo
+echo
+echo "**************************"
+echo
 echo "UBKGBox is ready"
+
+
 
