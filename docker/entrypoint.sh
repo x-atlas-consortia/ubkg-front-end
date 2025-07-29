@@ -26,11 +26,11 @@ chown -R ubkg:ubkg /var/run/nginx.pid
 chown -R ubkg:ubkg /var/cache/nginx
 chown -R ubkg:ubkg /var/log/nginx
 
-# Modify the home page in the container to point to the browser port of the ubkg-back-end
-# service. The port number is set in the container.cfg file of the ubkg-back-end (ubkg-neo4j)
-# application, and passed to the Dockerfile via the ubkg-box's Docker Compose.
-#echo "Updating home page for ubkg-back-end's neo4j browser port: $UI_PORT"
-#sed -i "s/UI_PORT/$UI_PORT/g" "/usr/share/nginx/home.html"
+# Modify the neo4j instructions in the home page in the container to point to the mapped Bolt port of
+# the ubkg-front-end service. The Bolt port is passed to the Dockerfile via the ubkg-box's
+# Docker Compose in the environment variable BOLT_PORT.
+echo "Updating home page for ubkg-back-end's Bolt port: $BOLT_PORT"
+sed -i "s/BOLT_PORT/$BOLT_PORT/g" "/usr/share/nginx/home.html"
 
 # Lastly we use su-exec to execute our process "$@" as the non-root user.
 # Remember CMD from a Dockerfile of child image gets passed to the entrypoint.sh as command line arguments
