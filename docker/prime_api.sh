@@ -22,64 +22,64 @@ echo "UBKG-api initialization script"
 
 UBKG_URL=http://ubkg-api:8080
 
-echo "calling: /"
+# echo "calling: /"
 curl --request GET \
  --url "${UBKG_URL}/" \
- --header "Accept: application/json" | cut -c1-60
+ --header "Accept: application/json" > /dev/null 2>&1
 
-echo "calling: /status"
+# echo "calling: /status"
 curl --request GET \
  --url "${UBKG_URL}/status" \
- --header "Accept: application/json" | cut -c1-60
+ --header "Accept: application/json" > /dev/null 2>&1
 
-echo "first call: /sources"
+# echo "first call: /sources"
 curl --request GET \
  --url "${UBKG_URL}/sources" \
- --header "Accept: application/json" | cut -c1-60
+ --header "Accept: application/json" > /dev/null 2>&1
 
-echo "repeat call: /sources"
+# echo "repeat call: /sources"
 curl --request GET \
  --url "${UBKG_URL}/sources" \
- --header "Accept: application/json" | cut -c1-60
+ --header "Accept: application/json" > /dev/null 2>&1
 
 # Guesdt specific
-echo "calling: /codes/FMA:7149/codes"
+# echo "calling: /codes/FMA:7149/codes"
 curl --request GET \
  --url "${UBKG_URL}/codes/FMA:7149/codes" \
- --header "Accept: application/json" | cut -c1-60
+ --header "Accept: application/json" > /dev/null 2>&1
 
-echo "calling: /codes/FMA:7149/concepts"
+# echo "calling: /codes/FMA:7149/concepts"
 curl --request GET \
  --url "${UBKG_URL}/codes/FMA:7149/concepts" \
- --header "Accept: application/json" | cut -c1-60
+ --header "Accept: application/json" > /dev/null 2>&1
 
-echo "calling: /codes/FMA:7149/terms"
+# echo "calling: /codes/FMA:7149/terms"
 curl --request GET \
  --url "${UBKG_URL}/codes/FMA:7149/terms" \
- --header "Accept: application/json" | cut -c1-60
+ --header "Accept: application/json" > /dev/null 2>&1
 
-echo "calling: /concepts/C0460002/concepts"
+# echo "calling: /concepts/C0460002/concepts"
 curl --request GET \
  --url "${UBKG_URL}/concepts/C0460002/concepts" \
- --header "Accept: application/json" | cut -c1-60
+ --header "Accept: application/json" > /dev/null 2>&1
 
 # Other
-echo "calling: /concepts/C0460002/codes"
+# echo "calling: /concepts/C0460002/codes"
 curl --request GET \
  --url "${UBKG_URL}/concepts/C0460002/codes" \
- --header "Accept: application/json" | cut -c1-60
+ --header "Accept: application/json" > /dev/null 2>&1
 
-echo "calling: /concepts/C0460002/definitions"
+# echo "calling: /concepts/C0460002/definitions"
 curl --request GET \
  --url "${UBKG_URL}/concepts/C0460002/definitions" \
- --header "Accept: application/json" | cut -c1-60
-echo
-echo
+ --header "Accept: application/json" > /dev/null 2>&1
+# echo
+# echo
 
-echo "calling: /concepts/C0460002/nodeobjects"
+# echo "calling: /concepts/C0460002/nodeobjects"
 curl --request GET \
  --url "${UBKG_URL}/concepts/C0460002/nodeobjects" \
- --header "Accept: application/json" | cut -c1-60
+ --header "Accept: application/json" > /dev/null 2>&1
 
 echo "Initialization complete"
 echo
