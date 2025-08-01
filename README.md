@@ -96,10 +96,3 @@ To support the neo4j browser, the nginx configuration features:
 2. The _/neo4j/browser_ location to handle neo4j redirects
 3. A location to handle requests for static resources (JavaScript) from the neo4j browser
 4. A separate stream for the bolt protocol
-
-## UBKGBox subnodes
-The front end assumes that there are network subnodes defined for downstream UBKG services. 
-The only required subnode is one named **neo4j.ubkg.com**, to allow reverse proxying to the neo4j browser hosted 
-by the **ubkg-back-end** service.
-
-Refer to the README.md in the ubkg-box repository for details.
